@@ -10,6 +10,11 @@ let initWebRoutes = (app)=>{
     route.get('/login', auth.showLogin );
     route.get('/register',auth.showRegister);
     route.get('/verifyotp', auth.showVerifyOtp);
+    
+    route.post('/register', auth.register);
+    route.post('/verifyotp' , auth.verifyOtp);
+    route.post('/login', auth.login);
+
     route.get('/auth/user', )
 
 
@@ -18,9 +23,7 @@ let initWebRoutes = (app)=>{
         res.render('auth/homePage');
     });
 
-    route.post('/register', auth.register);
-    route.post('/verifyotp' , auth.verifyOtp);
-    route.post('/login', auth.login);
+    
 
    
 

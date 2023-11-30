@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Xác minh OTP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <!-- Add your CSS link here if you have an external stylesheet -->
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <form action="/verifyotp" method="post">
-        <h1>Xác minh OTP</h1>
-            <label for="otp">Mã OTP:</label>
+    <div class="container">
+        <% if (typeof conflictError !== 'undefined') { %>
+            <p class="error"><%= conflictError %></p>
+        <% } %>
+        <form method="post" action="/verifyotp">
+            <label for="otp">Enter OTP:</label>
             <input type="text" id="otp" name="otp" required>
             <br>
-            <button type="submit">Xác minh</button>
-    </form>
+            <input type="submit" value="Verify OTP">
+        </form>
+    </div>
 </body>
 </html>

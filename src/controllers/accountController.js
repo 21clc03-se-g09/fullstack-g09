@@ -1,9 +1,19 @@
 import bcrypt from "bcrypt";
 import account from "../models/user";
 import mailController from "./mailController";
-import mail from "../config/mail";
+import { USER } from "../config/database";
 require ('dotenv').config();
 
+
+let showLogin = (req, res)=>{
+    return res.render('login.ejs');
+}
+let showRegister = (req, res)=>{
+    return res.render('register.ejs');
+}
+let showVerifyOtp = (req, res) =>{
+    return res.render('verifyOtp.ejs');
+}
 
 // middlewares kiểm tra người dùng đăng nhập hay chưa 
 let loggedin = (req, res, next) => {
@@ -25,15 +35,7 @@ let isAuth = (req, res, next) => {
 }
 
 
-let showLogin = (req, res)=>{
-    return res.render('login.ejs');
-}
-let showRegister = (req, res)=>{
-    return res.render('register.ejs');
-}
-let showVerifyOtp = (req, res) =>{
-    return res.render('verifyOtp.ejs');
-}
+
 
 let login = (req, res) => {
     const { username, password } = req.body;
@@ -75,21 +77,17 @@ let register = (req, res) => {
     const { new_username, new_password, mail } = req.body;
     console.log(new_username, new_password, mail);
     if (new_username && new_password && mail) {
-        console.log('K');
         account.findUser(new_username, (err, user) => { // kiểm tra user có tồn tại không 
             if (user) {
-                console.log('K1');
                 const errorRegister = 'Tài khoản đã tồn tại!';
                 return res.render('account.ejs', { errorRegister });
                 
             } 
             if(!user) {
-                console.log('K2');
                 const ac = { new_username, new_password, mail };
                 account.createAccount(ac, (err, message) => {
                     if (err) {
                         const errorRegister = message;
-                        console.log(message);
                         res.render('register.ejs', { errorRegister });
                     } else {
                         mailController.sendMail(ac.mail, "Verify Email",  (err, otp) => {
@@ -99,6 +97,7 @@ let register = (req, res) => {
                                 res.render('register.ejs', { errorRegister });
                             } else {
                                 req.session.otp=otp;
+                                req.session.user=new_username;
                                 res.render('verifyOtp.ejs');
                             }
                         });
@@ -112,17 +111,39 @@ let register = (req, res) => {
     }
 }
 let verifyOtp = (req, res) =>{
-    const OTP = req.body;
-    console.log(req.body);
-    if(OTP){
+    const reqOtp = req.body.otp;
+    if(reqOtp){
         console.log('OTP XÁC MMINH');
-        if(OTP == req.session.otp){
-            res.render('auth/homePage.ejs');
+        
+        const User = req.session.user;
+        const Otp= req.session.otp;
+        console.log( User);
+        console.log(Otp);
+        console.log(reqOtp);
+        if(reqOtp == Otp){
+            console.log(Otp);
+            console.log(User);
+            account.verify(User, (err, message) => {
+                if(err){
+                    const errorRegister = 'Lỗi xác thực vui lòng thử lại';
+                    res.render('verifyOtp.ejs', { errorRegister });
+                }
+                else{
+                    res.render('login.ejs');
+                }
+            });
+            
+        }
+        else{
+            console.log("otp không đúng ");
+            const errorRegister = 'Mã OTP không đúng vui lòng thử lại';
+            res.render('verifyOtp.ejs', { errorRegister });
         }
 
     } else{
-        console.log('ADMIN');
-        
+        console.log("vui longf nhaapj otp ");
+        const errorRegister = 'Mã OTP không đúng vui lòng thử lại';
+        res.render('verifyOtp.ejs', { errorRegister });
     }
 }
 

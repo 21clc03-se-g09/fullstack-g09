@@ -56,6 +56,9 @@
             </div>
           <form id="registerForm" action="/register" method="post">
             <h1>Đăng Ký</h1>
+            <% if (typeof conflictError !== 'undefined') { %>
+                <p class="error"><%= conflictError %></p>
+            <% } %>
             <label for="new_username">New User:</label>
             <input type="text" name="new_username" id="new_username" required>
             <br>

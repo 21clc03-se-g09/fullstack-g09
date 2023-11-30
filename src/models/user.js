@@ -34,9 +34,21 @@ let createAccount =(ac, result) =>{
     });
 } 
 
+let verify = (user, result) =>{
+    sql.query("CALL VERIFY_USER (?, @err)", [user], (err, message) =>{
+        if(err){
+            result(err, message);
+        }
+        else{
+            result(null, message);
+        }
+    });
+    return;
+}
 
 
 module.exports = {
     findUser: findUser,
     createAccount: createAccount,
+    verify: verify,
 }
