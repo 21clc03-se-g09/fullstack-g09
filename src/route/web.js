@@ -1,6 +1,7 @@
 import express from "express";
 import * as homeController from "../controllers/homeController";
-import * as auth from "../controllers/accountController"
+import * as auth from "../controllers/accountController";
+import * as admin from "../controllers/admin/adminController";
 let route=express.Router();
 
 let initWebRoutes = (app)=>{
@@ -15,7 +16,11 @@ let initWebRoutes = (app)=>{
     route.post('/verifyotp' , auth.verifyOtp);
     route.post('/login', auth.login);
 
-    route.get('/auth/user', )
+    ///admin
+    route.get('/adminHomePage', admin.showHomepage);
+    route.get('/admin/addnewproduct', admin.showAddNewProduct);
+    
+    route.post('/addmin/addnewproduct', admin.addNewProduct);
 
 
 
