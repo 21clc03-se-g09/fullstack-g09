@@ -19,6 +19,7 @@ let initWebRoutes = (app)=>{
     ///admin
     route.get('/adminHomePage', admin.showHomepage);
     route.get('/admin/addnewproduct', admin.showAddNewProduct);
+    route.get('/admin/accountmanagement', admin.showAccountManagement);
     
     route.post('/addmin/addnewproduct', admin.addNewProduct);
 

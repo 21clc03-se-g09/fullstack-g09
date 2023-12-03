@@ -1,0 +1,51 @@
+<!-- views/accounts.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/admin/accountManagement.css">
+  <link rel="stylesheet" href="../css/admin/header_footer.css">
+  <title>User Accounts</title>
+</head>
+<body>
+    <header>
+        <div class="addnewproduct" >
+            <i class="bi bi-speedometer2" style="font-size: 50px;"></i>
+            <p style="font-size: 25px; margin: 10px;">Admin Dashboard<p>
+        </div>
+    </header>
+    <nav>
+
+        <a href="/adminHomePage">Home</a>
+        <a href="#accounts">Home</a>
+        <a href="#products">Quản lý Sản phẩm</a>
+        <a href="#accounts">Quản lý Tài khoản</a>
+        
+    </nav>
+    <main>
+        <h1>User Accounts</h1>
+        <table>
+            <tr>
+              <th>Username</th>
+              <th>Password</th>
+              <th>User ID</th>
+              <th>Role ID</th>
+              <th>Verify</th>
+            </tr>
+            <% accounts.forEach(account => { %>
+              <tr>
+                <td><%= account.USERNAME %></td>
+                <td><%= account.PASSWORD %></td>
+                <td><%= account.USER_ID %></td>
+                <td><%= account.ROLE_ID %></td>
+                <td><%= account.VERIFY %></td>
+              </tr>
+            <% }); %>
+          </table>
+
+    </main>
+  
+  
+</body>
+</html>
