@@ -50,6 +50,21 @@
 
   <main class="main-content">  
   </main>
+  
+    <div class="product-container">
+      <% products.forEach(function(product) { %>
+          <div class="product">
+              <h2><%= product.PRODUCT_NAME %></h2>
+              <p><strong>Author:</strong> <%= product.AUTHOR_NAME %></p>
+              <p><strong>Category:</strong> <%= product.CATEGORY_NAME %></p>
+              <p><strong>Description:</strong> <%= product.DESCRIPTION %></p>
+              <p><strong>Published Date:</strong> <%= product.PUBLISHED_DATE %></p>
+              <p><strong>Quantity:</strong> <%= product.QUANTITY %></p>
+              <img src="<%= product.IMAGE_URL %>" alt="Product Image" width="200">
+              <button class="add-to-cart" data-product-id="<%= product.ID %>">Add to Cart</button>
+          </div>
+      <% }); %>
+    </div>
 
   <footer>
     <div class="footer-container">
