@@ -48,21 +48,32 @@ let login = (req, res) => {
                 return res.render('login.ejs', {conflictError });
             } 
             else {
-                bcrypt.compare(password, user.PASSWORDS, (err, result) => {
-                    if (!err) {
-                        //req.session.loggedin = true;
-                        //req.session.user = user;
-                        return res.redirect('/home'); // Điều hướng đến "/homePage   
-                    } 
-                    else {
-                        // Mật khẩu không hợp lệ
-
-                        
-                        const conflictError= "Tài khoản hoặc mật khẩu không chính xác.";
-                        res.render('login.ejs', {conflictError });
-                        
-                    }
-                })
+                account.findPassword(user, (er, f_password) =>{
+                    bcrypt.compare(password, f_password, (err, result) => {
+                        if (err) {
+                            console.log("err");
+                            const conflictError= "Tài khoản hoặc mật khẩu không chính xác.";
+                            return res.render('login.ejs', {conflictError });
+                            
+                        } 
+                        else {
+                            account.getRole(username, (err, role) => {
+                                console.log(res);
+                                if(role=='ADMIN'){
+                                    res.redirect('/adminHomePage');
+                                }
+                                if(role=='USER'){
+                                req.session.loggedin = true;
+                                req.session.user = user;
+                                    res.redirect('/home');
+                                }
+                            
+                            }); 
+                        }
+                    });
+                    
+                });
+                
             }
         })
     } 
@@ -113,13 +124,8 @@ let register = (req, res) => {
 let verifyOtp = (req, res) =>{
     const reqOtp = req.body.otp;
     if(reqOtp){
-        console.log('OTP XÁC MMINH');
-        
         const User = req.session.user;
         const Otp= req.session.otp;
-        console.log( User);
-        console.log(Otp);
-        console.log(reqOtp);
         if(reqOtp == Otp){
             console.log(Otp);
             console.log(User);

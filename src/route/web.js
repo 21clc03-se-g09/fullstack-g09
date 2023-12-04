@@ -25,9 +25,7 @@ let initWebRoutes = (app)=>{
 
 
 
-    route.get('/home', auth.isAuth, (req, res) => {
-        res.render('auth/homePage');
-    });
+    route.get('/home', homeController.getMainPage);
 
     
 

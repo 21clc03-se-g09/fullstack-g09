@@ -2,16 +2,35 @@ import sql from "./db";
 import bcrypt from "bcrypt"
 let findUser = (USERNAME, result) => {
     console.log(USERNAME);
-    sql.query("SELECT * FROM USERS WHERE USERNAME = ?", [USERNAME], (err, res) => {
+    sql.query("SELECT FIND_USER (?) AS RESULT", [USERNAME], (err, RESULT) => {
         if (err) {
             result(err, null);
-            return;
         }
-        if (res.length) {
-            result(null, res[0]);
-            return;
+        else{
+            result(null, RESULT[0].RESULT);
         }
-        result(null, null);
+    });
+}
+
+let findPassword = (user, result) =>{
+    sql.query("SELECT FIND_PASSWORD (?) AS RESULT", [user], (err, RESULT) =>{
+        if (err) {
+            result(err, null);
+            console.log(err);
+        }
+        else{
+            result(null, RESULT[0].RESULT);
+        }
+    });
+}
+let getRole = (user, result) =>{
+    sql.query(" SELECT FIND_ROLE (?) AS res", [user], (err, res)=>{
+        if (err) {
+            result(err, null);
+        }
+        else{
+            result(null, res[0].res);
+        }
     });
 }
 
@@ -47,8 +66,12 @@ let verify = (user, result) =>{
 }
 
 
+
+
 module.exports = {
     findUser: findUser,
     createAccount: createAccount,
     verify: verify,
+    getRole: getRole,
+    findPassword: findPassword,
 }
