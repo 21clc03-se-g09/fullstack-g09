@@ -49,9 +49,22 @@
   </header>
 
   <main class="main-content">  
-  </main>
-  
+    
     <div class="product-container">
+      <% products.forEach(function(product) { %>
+        <div class="book">
+          <img src="<%= product.IMAGE_URL %>"" alt="Book 1">
+          <div class="book-title"><%= product.PRODUCT_NAME %></div>
+          <div class="book-price"><%= product.PRICE %> đ</div>
+          <button class="add-to-cart">Thêm vào giỏ hàng</button>
+        </div>
+      <% }); %>
+
+    </div>
+      
+
+  
+    <!-- <div class="product-container">
       <% products.forEach(function(product) { %>
           <div class="product">
               <h2><%= product.PRODUCT_NAME %></h2>
@@ -64,7 +77,7 @@
               <button class="add-to-cart" data-product-id="<%= product.ID %>">Add to Cart</button>
           </div>
       <% }); %>
-    </div>
+    </div> -->
 
   <footer>
     <div class="footer-container">

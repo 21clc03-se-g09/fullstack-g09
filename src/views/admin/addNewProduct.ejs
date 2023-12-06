@@ -26,15 +26,18 @@
         
     </nav>
     <main>
+        <% if (typeof message !== 'undefined') { %>
+            <p style="color: rgb(0, 255, 17);" class="message"><%= message %></p>
+          <% } %>
         <form id="productForm"  action="/addmin/addnewproduct" method="post">
             <label for="productId">ID Sản phẩm:</label>
-            <input type="number" id="productId" name="productId" required>
+            <input type="text" id="productId" name="productId" required>
 
             <label for="productName">Tên sản phẩm:</label>
             <input type="text" id="productName" name="productName" required>
             
-            <label for="author">Tác giả:</label>
-            <input type="text" id="author" name="author" required>
+            <label for="price">Giá bán(VNĐ) :</label>
+            <input type="text" id="author" name="price" required>
       
             <label for="author">Tác giả:</label>
             <input type="text" id="author" name="author" required>

@@ -12,27 +12,49 @@ body {
 }
 
 .product-container {
+    max-height: 250px;
+    height: 250px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    justify-content: space-around;
     padding: 20px;
+
 }
 
-.product {
+.book {
+    width:200px;
+    height: 200px;
     border: 1px solid #ddd;
-    padding: 10px;
-    max-width: 300px;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+}
+
+.book img {
+    width: 60px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.book-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    height: 30px;
+}
+
+.book-price {
+    color: #28a745;
+    font-weight: bold;
 }
 
 .add-to-cart {
-    background-color: #4CAF50;
+    background-color: #28a745;
     color: white;
+    padding: 10px;
     border: none;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin-top: 10px;
     cursor: pointer;
+    margin-top: 10px;
+    position:relative;
+    bottom: 0;
 }

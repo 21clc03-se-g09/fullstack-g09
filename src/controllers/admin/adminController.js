@@ -22,16 +22,16 @@ let showAccountManagement = (req, res) =>{
 
 
 let addNewProduct = (req, res) => {
-    const {productId, productName, author, category, quantity, publishedDate, description, imageUrl } = req.body;
-    const prd={productId, productName, author, category, quantity, publishedDate, description, imageUrl };
-    console.log(prd);
+    const {productId, productName, price, author, category, quantity, publishedDate, description, imageUrl } = req.body;
+    const prd={productId, productName, price, author, category, quantity, publishedDate, description, imageUrl };
     admin.addProduct(prd, (err, message)=>{
         if(err){
-            console.log('lỗi: ');
-            console.log(message);
+            res.render('admin/addNewProduct.ejs', {message: message});
         }
         else{
-            console.log('thêm sản phẩm thành công!');
+            console.error()
+            const status = " Đã thêm sản phẩm thành công!";
+            res.render('admin/addNewProduct.ejs', {message: status});
         }
     }) 
 }

@@ -10,7 +10,6 @@ let getMainPage =(req, res) =>{
             console.log(account);
         }
         else{
-            console.log(products);
             res.render('mainPage.ejs', { products: products[0] });
         }
     });
