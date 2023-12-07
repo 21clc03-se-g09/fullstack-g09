@@ -18,7 +18,7 @@ let showVerifyOtp = (req, res) =>{
 // middlewares kiểm tra người dùng đăng nhập hay chưa 
 let loggedin = (req, res, next) => {
     if (req.session.loggedin) {
-        res.locals.user = req.session.user
+        res.locals.user = req.session.user;
         next();
     } else {
         res.redirect('/login')
@@ -39,7 +39,6 @@ let isAuth = (req, res, next) => {
 
 let login = (req, res) => {
     const { username, password } = req.body;
-    
     
     if (username && password) {
         account.findUser(username, (err, user) => {
@@ -91,7 +90,7 @@ let register = (req, res) => {
         account.findUser(new_username, (err, user) => { // kiểm tra user có tồn tại không 
             if (user) {
                 const errorRegister = 'Tài khoản đã tồn tại!';
-                return res.render('account.ejs', { errorRegister });
+                return res.render('register.ejs', { errorRegister });
                 
             } 
             if(!user) {
@@ -109,7 +108,7 @@ let register = (req, res) => {
                             } else {
                                 req.session.otp=otp;
                                 req.session.user=new_username;
-                                res.render('verifyOtp.ejs');
+                                res.redirect('/verifyotp');
                             }
                         });
                     }

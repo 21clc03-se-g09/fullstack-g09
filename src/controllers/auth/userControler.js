@@ -1,10 +1,18 @@
-import bcrypt from "bcrypt";
-import account from "../models/user";
-import mailController from "./mailController";
+import home from "../../models/home";
 require ('dotenv').config();
 
 let showHomePage = (req, res) =>{
-    return res.render('auth/homePage');
+    home.getAllProduct(req, (err, products)=>{
+        if(err){
+            return res.redirect('/err');
+        }
+        else{
+            const user =req.session.user;
+            return res.render('auth/homePage.ejs', {products: products[0], user: user});
+
+        }
+    });
+    
 }
 
 module.exports = {

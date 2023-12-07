@@ -148,20 +148,19 @@ footer {
     color: #fff;
     text-align: center;
     width: 100%;
-    padding: 10px;
     position:fixed;
     bottom: 0;
 }
 
 .footer-container {
     display:flex;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
 .footer-left,
 .footer-right {
-    width: 50%;
+    width: 40%;
+    margin: 0 auto;
 }
 
 .footer-left h3,
@@ -175,9 +174,9 @@ footer {
     color: #fff;
     text-decoration: none;
     display: block;
-    margin-bottom: 10px;
 }
 
 .footer-right a:hover {
     text-decoration: underline;
 }
+

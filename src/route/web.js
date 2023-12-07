@@ -2,11 +2,12 @@ import express from "express";
 import * as homeController from "../controllers/homeController";
 import * as auth from "../controllers/accountController";
 import * as admin from "../controllers/admin/adminController";
+import * as user from "../controllers/auth/userControler";
 let route=express.Router();
 
 let initWebRoutes = (app)=>{
 
-    //home page
+    //mainpage
     route.get('/', homeController.getMainPage);
     route.get('/login', auth.showLogin );
     route.get('/register',auth.showRegister);
@@ -16,16 +17,21 @@ let initWebRoutes = (app)=>{
     route.post('/verifyotp' , auth.verifyOtp);
     route.post('/login', auth.login);
 
+    //homepage
+    route.get('/home', auth.loggedin, user.showHomePage);
+
     ///admin
-    route.get('/adminHomePage', admin.showHomepage);
+    route.get('/adminHomePage',auth.loggedin, admin.showHomepage);
     route.get('/admin/addnewproduct', admin.showAddNewProduct);
     route.get('/admin/accountmanagement', admin.showAccountManagement);
     
     route.post('/addmin/addnewproduct', admin.addNewProduct);
 
 
-
-    route.get('/home', homeController.getMainPage);
+    //err
+    route.get('/err', (req, res) => {
+        return res.render('err.ejs');
+    });
 
     
 

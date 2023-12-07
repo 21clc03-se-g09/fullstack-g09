@@ -7,7 +7,7 @@ let getHomePage =(req, res) =>{
 let getMainPage =(req, res) =>{
     home.getAllProduct(req, (err, products) =>{
         if(err){
-            console.log(account);
+            return res.redirect('/err');
         }
         else{
             res.render('mainPage.ejs', { products: products[0] });
