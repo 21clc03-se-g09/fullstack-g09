@@ -55,10 +55,14 @@
           <img src="<%= product.IMAGE_URL %>"" alt="Book 1">
           <div class="book-title"><%= product.PRODUCT_NAME %></div>
           <div class="book-price"><%= product.PRICE %> đ</div>
-          <button class="add-to-cart">Thêm vào giỏ hàng</button>
+          <form action="/addtocart" method="post">
+            <input type="hidden" name="productId" value="<%= product.ID %>">
+            <input type="hidden" name="username" value="<%= user %>">
+            <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+          </form>
         </div>
+        
       <% }); %>
-
     </div>
   </main>
 

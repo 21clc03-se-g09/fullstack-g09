@@ -15,7 +15,23 @@ let showHomePage = (req, res) =>{
     
 }
 
+let addToCart = (req, res) => {
+    const {productId, username} = req.body;
+    const cart = {productId, username};
+    home.addToCart(cart, (err, message)=>{
+        console.log(message);
+        if(err){
+            return res.redirect('/err');
+        }
+        else{
+            return res.redirect('/home');
+        }
+    })
+
+} 
+
 module.exports = {
     showHomePage : showHomePage,
+    addToCart: addToCart,
 
 }

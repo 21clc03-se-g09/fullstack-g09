@@ -16,7 +16,6 @@ let findPassword = (user, result) =>{
     sql.query("SELECT FIND_PASSWORD (?) AS RESULT", [user], (err, RESULT) =>{
         if (err) {
             result(err, null);
-            console.log(err);
         }
         else{
             result(null, RESULT[0].RESULT);
@@ -64,11 +63,6 @@ let verify = (user, result) =>{
     });
     return;
 }
-
-
-
-
-
 
 
 module.exports = {
