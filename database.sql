@@ -264,19 +264,33 @@ BEGIN
     WHERE P.ID = p_PRODUCT_ID;
 END;
 
----Lấy sản phẩm giỏ hàng
-CREATE PROCEDURE GET_CART(IN p_USER_NAME VARCHAR(30))
-BEGIN
-    SELECT *
-    FROM CART C
-    JOIN CART_DETAIL CD ON CD.CART_ID =  C.ID
-    WHERE C.USER_NAME = CD
 
+---update tổng tiền sản phẩm
+CREATE PROCEDURE UPDATE_TOTAL_MONEY(IN p_USERNAME VARCHAR(30))
+BEGIN
+    DECLARE totalmoney INT;
+    SET totalmoney = (SELECT SUM(CD.PRICE)
+                        FROM CART C
+                      JOIN CART_DETAIL CD ON CD.CART_ID =  C.ID
+                      WHERE C.USER_NAME = p_USERNAME);
+    UPDATE CART
+    SET CART.TOTAL_MONEY = totalmoney
+    WHERE CART.USER_NAME = p_USERNAME;
 END;
 
 
+---Lấy sản phẩm giỏ hàng
+CREATE PROCEDURE GET_PRODUCT_CART(IN p_USER_NAME VARCHAR(30))
+BEGIN
+    SELECT C.STATE, CD.PRODUCT_ID, CD.NUMBER, CD.PRICE 
+    FROM CART C
+    JOIN CART_DETAIL CD ON CD.CART_ID =  C.ID
+    WHERE C.USER_NAME = p_USER_NAME;
+END;
 
 -- Thêm sản phẩm vào giảo hàng
+
+
 
 CREATE PROCEDURE ADD_CART(IN p_PRODUCT_ID VARCHAR(5), IN p_USERNAME VARCHAR(30), OUT p_Message NVARCHAR(100))
 BEGIN
@@ -307,14 +321,14 @@ BEGIN
             INSERT INTO CART_DETAIL (CART_ID, NO_CART, NUMBER, PRICE, PRODUCT_ID)
             VALUES (cart_id, no_cart, num, p_price, p_PRODUCT_ID);
         END IF;
-
+        CALL UPDATE_TOTAL_MONEY(p_USERNAME);
         SET p_Message = 'Đã thêm sản phẩm vào giỏ hàng';
     END IF;
 END;
 
-DROP PROCEDURE ADD_CART
+--DROP PROCEDURE ADD_CART
 
-CALL ADD_CART ('bk102', 'minhquang', @p_mes); SELECT @p_mes;
+--CALL ADD_CART ('bk102', 'minhquang', @p_mes); SELECT @p_mes;
 
 
 
@@ -329,7 +343,7 @@ CALL ADD_CART ('bk102', 'minhquang', @p_mes); SELECT @p_mes;
 
 --- 
 
-
+--tìm user
 CREATE FUNCTION FIND_USER(Username VARCHAR(30))
 RETURNS VARCHAR(30)
 DETERMINISTIC
@@ -342,6 +356,7 @@ BEGIN
     RETURN result;
 END;
 
+---tìm password
 CREATE FUNCTION FIND_PASSWORD(Username VARCHAR(30))
 RETURNS VARCHAR(300)
 DETERMINISTIC
@@ -354,7 +369,7 @@ BEGIN
     RETURN result;
 END;
 
-
+--Tìm role
 CREATE FUNCTION FIND_ROLE(Username VARCHAR(30))
 RETURNS VARCHAR(30)
 DETERMINISTIC
@@ -365,6 +380,17 @@ BEGIN
     FROM ROLE 
     JOIN USER ON USER.ROLE_ID = ROLE.ID
     WHERE USER.USER_NAME = Username);
+    RETURN result;
+END;
+
+--Tính tổng tiền giỏ hàng
+CREATE FUNCTION TOTAL_CART(username VARCHAR(30))
+RETURNS INT
+DETERMINISTIC
+NO SQL
+BEGIN
+    DECLARE result INT;
+    SET result = (SELECT TOTAL_MONEY FROM CART WHERE USER_NAME = Username);
     RETURN result;
 END;
 
