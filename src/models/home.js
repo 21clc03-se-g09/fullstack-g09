@@ -21,6 +21,17 @@ let addToCart = (cart, result) =>{
         }
     })
 }
+
+let getCart = (username, result) =>{
+    sql.query("CALL GET_PRODUCT_CART(?)", [username], (err, product)=>{
+        if(err){
+            result(err, err);
+        }
+        else{
+            result(null, product[0]);
+        }
+    });
+}
 module.exports = {
     getAllProduct: getAllProduct,
     addToCart: addToCart,

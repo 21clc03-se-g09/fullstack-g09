@@ -12,7 +12,18 @@ let showHomePage = (req, res) =>{
 
         }
     });
-    
+}
+
+let showCart = (req, res) => {
+    const username = req.session.user;
+    home.getCart(username, (err, products) => {
+        if(err){
+            res.redirect('/err');
+        }
+        else{
+            res.render('/home/cart', {username: username, products: products});
+        }
+    });
 }
 
 let addToCart = (req, res) => {
@@ -26,12 +37,12 @@ let addToCart = (req, res) => {
         else{
             return res.redirect('/home');
         }
-    })
+    });
 
 } 
 
 module.exports = {
     showHomePage : showHomePage,
+    showCart: showCart,
     addToCart: addToCart,
-
 }
