@@ -21,7 +21,14 @@ let showCart = (req, res) => {
             res.redirect('/err');
         }
         else{
-            res.render('/home/cart', {username: username, products: products});
+            home.getToltalCart(username, (err, totalCart)=>{
+                if(err){
+                    res.redirect('/err');
+                }
+                else{
+                    res.render('auth/cart.ejs', {username: username, products: products, totalCart: totalCart});
+                }
+            }) 
         }
     });
 }

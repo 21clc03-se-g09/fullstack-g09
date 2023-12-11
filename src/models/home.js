@@ -32,7 +32,22 @@ let getCart = (username, result) =>{
         }
     });
 }
+
+let getToltalCart = (username, result) =>{
+    sql.query("SELECT TOTAL_CART(?) AS RESULT", [username], (err,  RESULT) =>{
+        if(err){
+            console.log(err);
+            result(err, err);
+        }
+        else{
+            result(null,  RESULT[0].RESULT);
+        }
+    });
+}
+
 module.exports = {
     getAllProduct: getAllProduct,
     addToCart: addToCart,
+    getCart: getCart,
+    getToltalCart: getToltalCart,
 }
