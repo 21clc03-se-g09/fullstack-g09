@@ -17,6 +17,20 @@ let showAccountManagement = (req, res) =>{
     });
     
 }
+let isAdmin = (req, res, next) =>{
+    if(req.session.loggedin){
+        if(req.session.role == 'ADMIN'){
+            next();
+        }
+        else{
+            res.redirect('/err');
+        }
+    }
+    else{
+        res.redirect('/login')
+    }
+}
+
 
 
 
@@ -42,4 +56,5 @@ module.exports = {
     showAddNewProduct: showAddNewProduct,
     showAccountManagement: showAccountManagement,
     addNewProduct: addNewProduct,
+    isAdmin: isAdmin,
 }

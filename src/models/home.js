@@ -45,9 +45,28 @@ let getToltalCart = (username, result) =>{
     });
 }
 
+let getOrder = (username, result) =>{
+    sql.query("CALL GET_ORDER(?)", [username], (err, orderIf) =>{
+        if(err){
+            result(err, err); 
+        }
+        else{
+            result(null, orderIf[0]);
+        }
+    });
+}
+
+let getUserInfor = (username, result) =>{
+    sql.query("CALL GET_USER_INFOR(?)", [])
+}
+
+
+
+
 module.exports = {
     getAllProduct: getAllProduct,
     addToCart: addToCart,
     getCart: getCart,
     getToltalCart: getToltalCart,
+    getOrder: getOrder,
 }

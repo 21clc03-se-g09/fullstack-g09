@@ -25,14 +25,6 @@ let loggedin = (req, res, next) => {
     }
 }
 
-let isAuth = (req, res, next) => {
-    if (req.session.loggedin) {
-        res.locals.user = req.session.user
-        res.redirect('/home');
-    } else {
-        next();
-    }
-}
 
 
 
@@ -58,10 +50,12 @@ let login = (req, res) => {
                         else {
                             account.getRole(username, (err, role) => {
                                 if(role=='ADMIN'){
+                                    req.session.role = 'ADMIN';
                                     res.redirect('/adminHomePage');
                                 }
                                 if(role=='USER'){
                                 req.session.loggedin = true;
+                                req.session.role = 'USER';
                                 req.session.user = user;
                                     res.redirect('/home');
                                 }
@@ -164,7 +158,6 @@ let logout = (req, res) => {
 }
 module.exports = {
     loggedin: loggedin,
-    isAuth: isAuth,
     showLogin: showLogin, 
     showRegister: showRegister,
     showVerifyOtp: showVerifyOtp,

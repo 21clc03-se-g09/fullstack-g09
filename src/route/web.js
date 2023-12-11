@@ -20,12 +20,14 @@ let initWebRoutes = (app)=>{
     //homepage
     route.get('/home', auth.loggedin, user.showHomePage);
     route.get('/home/cart', auth.loggedin, user.showCart);
+    route.get('/home/cart/order',auth.loggedin, user.showOrder);
+    route.get('/home/updateinfor', user.showUpdateInfor);
     
     route.post('/addtocart', user.addToCart);
 
     ///admin
-    route.get('/adminHomePage',auth.loggedin, admin.showHomepage);
-    route.get('/admin/addnewproduct', admin.showAddNewProduct);
+    route.get('/adminHomePage',admin.isAdmin, admin.showHomepage);
+    route.get('/admin/addnewproduct',admin.isAdmin, admin.showAddNewProduct);
     route.get('/admin/accountmanagement', admin.showAccountManagement);
     
     route.post('/addmin/addnewproduct', admin.addNewProduct);

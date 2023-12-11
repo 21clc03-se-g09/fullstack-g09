@@ -15,6 +15,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
+    margin-bottom: 300px;
 }
 
 .cart-item {
@@ -68,3 +69,28 @@ body {
     margin-top: 20px;
     text-align: right;
 }
+.tolal-cart {
+    position: absolute; 
+    right: 0;
+  }
+
+  form {
+    position: absolute;
+    margin-top: 70px;
+    right: 0;
+  }
+  
+  .order {
+   
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .order:hover {
+    background-color: #45a049;
+  }

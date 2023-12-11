@@ -64,7 +64,6 @@ let verify = (user, result) =>{
     return;
 }
 
-
 module.exports = {
     findUser: findUser,
     createAccount: createAccount,

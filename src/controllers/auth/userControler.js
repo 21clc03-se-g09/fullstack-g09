@@ -1,3 +1,4 @@
+import { render } from "express/lib/response";
 import home from "../../models/home";
 require ('dotenv').config();
 
@@ -45,11 +46,31 @@ let addToCart = (req, res) => {
             return res.redirect('/home');
         }
     });
-
 } 
+
+let showOrder = (req, res) =>{
+    const username = req.session.user;
+    home.getOrder(username, (err, orderIf)=>{
+        console.log('t: ' + username);
+        if(err){
+            console.log(err);
+            res.redirect('/err');
+        }
+        else{
+            console.log(orderIf);
+            res.render('auth/order.ejs', {username: username, orderIf: orderIf[0]});
+        }
+    });
+}
+
+let showUpdateInfor = (req, res) =>{
+    res.render('auth/updateinfor.ejs');
+}
 
 module.exports = {
     showHomePage : showHomePage,
     showCart: showCart,
     addToCart: addToCart,
+    showOrder: showOrder,
+    showUpdateInfor: showUpdateInfor,
 }
