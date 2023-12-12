@@ -24,6 +24,7 @@ let initWebRoutes = (app)=>{
     route.get('/home/updateinfor', user.showUpdateInfor);
     
     route.post('/addtocart', user.addToCart);
+    route.post('/updateinfor', user.updateInfor);
 
     ///admin
     route.get('/adminHomePage',admin.isAdmin, admin.showHomepage);

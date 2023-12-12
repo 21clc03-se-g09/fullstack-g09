@@ -57,8 +57,26 @@ let getOrder = (username, result) =>{
 }
 
 let getUserInfor = (username, result) =>{
-    sql.query("CALL GET_USER_INFOR(?)", [])
+    sql.query("CALL GET_USER_INFOR(?)", [username], (err, userIfor)=>{
+        if(err){
+            result(err, err);
+        }
+        else{
+            result(null, userIfor[0]);
+        }
+    });
 }
+
+let updateInfor = (user, result) =>{
+    sql.query("CALL UPDATE_INFOR (?, ?, ?, ?, ?, @mes)", [user.username, user.fullName, user.birthday, user.phone, user.address], (err, mesage)=>{
+        if(err){
+            result(err, err);
+        }
+        else{
+            result(null, mesage);
+        }
+    });
+} 
 
 
 
@@ -69,4 +87,6 @@ module.exports = {
     getCart: getCart,
     getToltalCart: getToltalCart,
     getOrder: getOrder,
+    getUserInfor: getUserInfor,
+    updateInfor: updateInfor,
 }

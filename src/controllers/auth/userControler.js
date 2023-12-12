@@ -51,20 +51,41 @@ let addToCart = (req, res) => {
 let showOrder = (req, res) =>{
     const username = req.session.user;
     home.getOrder(username, (err, orderIf)=>{
-        console.log('t: ' + username);
         if(err){
-            console.log(err);
             res.redirect('/err');
         }
         else{
-            console.log(orderIf);
             res.render('auth/order.ejs', {username: username, orderIf: orderIf[0]});
         }
     });
 }
 
 let showUpdateInfor = (req, res) =>{
-    res.render('auth/updateinfor.ejs');
+    const username = req.session.user;
+    home.getUserInfor(username, (err, userIf)=>{
+        if(err){
+            res.redirect('/err');
+        }
+        else{
+            res.render('auth/updateinfor.ejs', {userIf: userIf[0]});
+        }
+    })
+}
+
+let updateInfor = (req, res) =>{
+    const username = req.session.user;
+    const {fullName, phone, birthday, mail, address} = req.body;
+    const user = {username, fullName, phone, birthday, mail, address}
+    home.updateInfor(user, (err, message)=>{
+        if(err){
+            console.log(err);
+            res.redirect('/err');
+        }
+        else{
+            console.log(message);
+            res.redirect('/home/updateinfor');
+        }
+    });
 }
 
 module.exports = {
@@ -73,4 +94,5 @@ module.exports = {
     addToCart: addToCart,
     showOrder: showOrder,
     showUpdateInfor: showUpdateInfor,
+    updateInfor: updateInfor,
 }
