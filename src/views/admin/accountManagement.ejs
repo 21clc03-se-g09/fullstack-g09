@@ -31,16 +31,18 @@
               <th>Username</th>
               <th>Password</th>
               <th>User ID</th>
-              <th>Role ID</th>
+              <th>Role</th>
               <th>Verify</th>
+              <th> </th>
             </tr>
             <% accounts.forEach(account => { %>
               <tr>
-                <td><%= account.USERNAME %></td>
+                <td><%= account.USER_NAME %></td>
                 <td>****</td>
-                <td><%= account.USER_ID %></td>
-                <td><%= account.ROLE_ID %></td>
+                <td><%=account.ID%></td>
+                <td><%= account.ROLE_NAME %></td>
                 <td><%= account.VERIFY %></td>
+                <td><Button>xoá tài khoản</Button></td>
               </tr>
             <% }); %>
           </table>

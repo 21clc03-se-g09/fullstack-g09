@@ -12,12 +12,11 @@ let addProduct = (prd, result)=> {
 }
 
 let getAccount = (req, result) =>{
-    sql.query("SELECT * FROM USER", (err, accounts) => {
+    sql.query("CALL GET_ALL_ACCOUNT()", (err, accounts) => {
         if (err) {
-            console.error('Error while executing query:', err);
-            result(err, null);
+            result(err, err);
         } else {
-            result(null, accounts);
+            result(null, accounts[0]);
         }
     });
     

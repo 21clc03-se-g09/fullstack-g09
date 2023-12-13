@@ -43,24 +43,28 @@ let login = (req, res) => {
                     console.log(f_password);
                     bcrypt.compare(password, f_password, (err, result) => {
                         if (err) {
-                            const conflictError= "Tài khoản hoặc mật khẩu không chính xác.";
-                            return res.render('login.ejs', {conflictError });
-                            
+                            res.redirect('/err'); 
                         } 
                         else {
-                            account.getRole(username, (err, role) => {
-                                if(role=='ADMIN'){
-                                    req.session.role = 'ADMIN';
-                                    res.redirect('/adminHomePage');
-                                }
-                                if(role=='USER'){
-                                req.session.loggedin = true;
-                                req.session.role = 'USER';
-                                req.session.user = user;
-                                    res.redirect('/home');
-                                }
+                            if(result){
+                                account.getRole(username, (err, role) => {
+                                    if(role=='ADMIN'){
+                                        req.session.role = 'ADMIN';
+                                        res.redirect('/adminHomePage');
+                                    }
+                                    if(role=='USER'){
+                                    req.session.loggedin = true;
+                                    req.session.role = 'USER';
+                                    req.session.user = user;
+                                        res.redirect('/home');
+                                    }
+                                }); 
+                            }
+                            else{
+                                const conflictError= "Tài khoản hoặc mật khẩu không chính xác.";
+                                return res.render('login.ejs', {conflictError });
+                            }
                             
-                            }); 
                         }
                     });
                     
