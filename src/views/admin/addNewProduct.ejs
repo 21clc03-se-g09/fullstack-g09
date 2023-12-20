@@ -21,8 +21,8 @@
 
         <a href="/adminHomePage">Home</a>
         <a href="#accounts">Home</a>
-        <a href="#products">Quản lý Sản phẩm</a>
-        <a href="#accounts">Quản lý Tài khoản</a>
+        <a href="#products">Manage Product</a>
+        <a href="#accounts">Manage Account</a>
         
     </nav>
     <main>
@@ -30,34 +30,34 @@
             <p style="color: rgb(0, 255, 17);" class="message"><%= message %></p>
           <% } %>
         <form id="productForm"  action="/addmin/addnewproduct" method="post">
-            <label for="productId">ID Sản phẩm:</label>
+            <label for="productId">Product ID:</label>
             <input type="text" id="productId" name="productId" required>
 
-            <label for="productName">Tên sản phẩm:</label>
+            <label for="productName">Product Name:</label>
             <input type="text" id="productName" name="productName" required>
             
-            <label for="price">Giá bán(VNĐ) :</label>
+            <label for="price">Price (VND) :</label>
             <input type="text" id="author" name="price" required>
       
-            <label for="author">Tác giả:</label>
+            <label for="author">Author:</label>
             <input type="text" id="author" name="author" required>
       
-            <label for="category">Danh mục:</label>
+            <label for="category">Category:</label>
             <input type="text" id="category" name="category" required>
       
-            <label for="quantity">Số lượng:</label>
+            <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" required min="0">
       
-            <label for="publishedDate">Ngày xuất bản:</label>
+            <label for="publishedDate">Publish Date:</label>
             <input type="date" id="publishedDate" name="publishedDate" required>
       
-            <label for="description">Mô tả:</label>
+            <label for="description">Description:</label>
             <textarea id="description" name="description" rows="4" required></textarea>
       
-            <label for="imageUrl">URL hình ảnh:</label>
+            <label for="imageUrl">Image URL:</label>
             <input type="text" id="imageUrl" name="imageUrl" required>
       
-            <input type="submit" value="thêm sản phẩm">
+            <input type="submit" value="addNewProduct">
           </form>
     </main>
 

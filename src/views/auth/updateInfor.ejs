@@ -20,19 +20,19 @@
     </div>
     <div class="cart"> 
       <i class="bi bi-cart3"> </i>
-      <p style="font-size: 10px;">Giỏ Hàng</p>
+      <p style="font-size: 10px;">Cart</p>
     </div>
     <div class="notification">
       <i class="bi bi-bell"> </i>
-      <p style="font-size: 10px;">Thông Báo</p>
+      <p style="font-size: 10px;">Notifications</p>
     </div>
       
     <div class="account" onclick="toggleLoginOptions()">
       <i class="bi bi-person-circle"></i>
-      <p style="font-size: 10px;">Tài Khoản</p>
+      <p style="font-size: 10px;">Account</p>
       <div class="login-options" id="loginOptions" style="display: none;">
-        <button onclick="redirectTo('/login')">Đăng Nhập</button>
-        <button onclick="redirectTo('/register')">Đăng Ký</button>
+        <button onclick="redirectTo('/login')">Sign In</button>
+        <button onclick="redirectTo('/register')">Register / Signup</button>
       </div>
     </div>
     
@@ -52,26 +52,26 @@
 
     <div class="update-container">
         <div class="title-update" >
-            Cập Nhật Thông Tin
+            Update Information
         </div>
 
         <form action="/updateinfor" method="post">
-            <label for="fullName">Họ và tên:</label>
+            <label for="fullName">Fullname:</label>
             <input type="text" id="fullName" name="fullName" required value="<%= userIf.FULLNAME %>"> 
 
-            <label for="phone">Số điện thoại:</label>
+            <label for="phone">Phone Number:</label>
             <input type="text" id="phone" name="phone" required value="<%= userIf.PHONE_NUMBER %>">
 
-            <label for="birthday">Ngày Sinh:</label>
+            <label for="birthday">Date of Birth:</label>
             <input type="date" id="birthday" name="birthday" value="userIf.BIRTHDAY" required>
             
-            <label for="mail">Mail:</label>
+            <label for="mail">Email:</label>
             <input type="email" id="mail" name="mail" value="<%=userIf.MAIL %>" required>
 
-            <label for="address">Địa chỉ:</label>
+            <label for="address">Address:</label>
             <input type="text" id="address" name="address" required value="<%= userIf.ADDRESS %>">
             <div  class="update-submit">
-                <button type="submit">Cập nhật thông tin</button>
+                <button type="submit">Update Information</button>
             </div>
         </form>
         
