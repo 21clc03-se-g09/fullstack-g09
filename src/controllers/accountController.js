@@ -31,7 +31,6 @@ let loggedin = (req, res, next) => {
 
 let login = (req, res) => {
     const { username, password } = req.body;
-    
     if (username && password) {
         account.findUser(username, (err, user) => {
             if (!user) {
@@ -50,13 +49,14 @@ let login = (req, res) => {
                                 account.getRole(username, (err, role) => {
                                     if(role=='ADMIN'){
                                         req.session.role = 'ADMIN';
+                                        req.session.loggedin = true;
                                         res.redirect('/adminHomePage');
                                     }
                                     if(role=='USER'){
                                     req.session.loggedin = true;
                                     req.session.role = 'USER';
                                     req.session.user = user;
-                                        res.redirect('/home');
+                                    res.redirect('/home');
                                     }
                                 }); 
                             }

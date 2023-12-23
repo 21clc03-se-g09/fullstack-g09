@@ -14,8 +14,7 @@ let showAccountManagement = (req, res) =>{
         else{
             res.render('admin/accountManagement.ejs', { accounts: account });
         }
-    });
-    
+    }); 
 }
 let isAdmin = (req, res, next) =>{
     if(req.session.loggedin){
@@ -31,6 +30,24 @@ let isAdmin = (req, res, next) =>{
     }
 }
 
+let removeAcount = (req, res) =>{
+    const {username} = req.body;
+    if(username){
+        admin.removeAcount(username, (err, message)=>{
+            if(err){
+                console.log(err);
+                res.redirect('/admin/accountmanagement');
+            }
+            else{
+                res.redirect('/admin/accountmanagement');
+            }
+
+        });
+    }
+    else{
+        res.render('admin/accountManagement.ejs', {message: 'lỗi xoá tài khoản'});
+    }
+}
 
 
 
@@ -57,4 +74,5 @@ module.exports = {
     showAccountManagement: showAccountManagement,
     addNewProduct: addNewProduct,
     isAdmin: isAdmin,
+    removeAcount: removeAcount,
 }

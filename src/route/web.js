@@ -31,7 +31,8 @@ let initWebRoutes = (app)=>{
     route.get('/admin/addnewproduct',admin.isAdmin, admin.showAddNewProduct);
     route.get('/admin/accountmanagement', admin.showAccountManagement);
     
-    route.post('/addmin/addnewproduct', admin.addNewProduct);
+    route.post('/addmin/addnewproduct', admin.isAdmin, admin.addNewProduct);
+    route.post('/admin/removeacount', admin.removeAcount);
 
 
     //err

@@ -21,9 +21,20 @@ let getAccount = (req, result) =>{
     });
     
 }
+let removeAcount = (ussername, result)=>{
+    sql.query(" CALL DELETE_USER (?)", [ussername], (err, message)=>{
+        if(err){
+            result(err, err);
+        }
+        else{
+            result(null, 'Đã xoá tài khoản');
+        }
+    })
+}
 
 module.exports = {
     addProduct: addProduct,
     getAccount: getAccount,
+    removeAcount: removeAcount,
 }
 

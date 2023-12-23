@@ -16,14 +16,11 @@
         <p style="font-size: 25px; margin-top: 10px;">Admin Dashboard<p>
     </div>
 </header>
-    <nav>
-
-        <a href="/adminHomePage">Home</a>
-        <a href="#accounts">Home</a>
-        <a href="#products">Quản lý Sản phẩm</a>
-        <a href="#accounts">Quản lý Tài khoản</a>
-        
-    </nav>
+  <nav>
+    <a href="/admin/addnewproduct"> Thêm sản phẩm mới</a>
+    <a href="#products">Quản lý Sản phẩm</a>
+    <a href="/admin/accountmanagement">Quản lý Tài khoản</a>
+  </nav>
     <main>
         <h1>User Accounts</h1>
         <table>
@@ -42,7 +39,12 @@
                 <td><%=account.ID%></td>
                 <td><%= account.ROLE_NAME %></td>
                 <td><%= account.VERIFY %></td>
-                <td><Button>xoá tài khoản</Button></td>
+                <td> 
+                  <form action="/admin/removeacount" method="post">
+                  <input type="hidden" name="username" value="<%= account.USER_NAME %>">
+                  <button class="remove-acount" type="submit">Remove</button>
+                </form>
+              </td>
               </tr>
             <% }); %>
           </table>
