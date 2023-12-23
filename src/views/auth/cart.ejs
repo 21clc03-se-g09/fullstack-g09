@@ -52,7 +52,7 @@
 
     <div class="cart-container">
       <% products.forEach(function(product) { %>
-        <div class="cart-item">
+        <div class="cart-item" data-product-id="<%= product.ID %>">
           <img src="<%= product.IMAGE_URL %>"" alt="Book 1">
           <div class="book-title">
             <%= product.PRODUCT_NAME %>
@@ -67,7 +67,7 @@
           <input type="number" id="quantity" name="quantity" value="<%= product.NUMBER %>" min="1">
         </div>
         <div class="cart-total">
-          <p>Total: <%= product.TOTAL_PRICE %></p>
+          <p>Total:  <%=  Intl.NumberFormat().format(product.TOTAL_PRICE*1000)%>đ</p>
         </div>
       <% }); %>
       <div class="tolal-cart">

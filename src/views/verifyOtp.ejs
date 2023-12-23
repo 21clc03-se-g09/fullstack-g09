@@ -4,33 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
-    <!-- Add your CSS link here if you have an external stylesheet -->
     <style>
-        /* Add your CSS styles here */
+        body, h1, h2, p, input {
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             margin: auto;
-            text-align: center;
             padding: 20px;
+            box-sizing: border-box;
         }
         .error-message {
             color: red;
             margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <% if (typeof conflictError !== 'undefined') { %>
-            <p class="error"><%= conflictError %></p>
+            <p class="error-message"><%= conflictError %></p>
         <% } %>
         <form method="post" action="/verifyotp">
             <label for="otp">Enter OTP:</label>
             <input type="text" id="otp" name="otp" required>
-            <br>
             <input type="submit" value="Verify OTP">
         </form>
     </div>
