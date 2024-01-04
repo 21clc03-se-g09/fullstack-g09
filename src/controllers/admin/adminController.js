@@ -61,7 +61,7 @@ let addNewProduct = (req, res) => {
         }
         else{
             console.error()
-            const status = " Đã thêm sản phẩm thành công!";
+            const status = "Product added successfully!";
             res.render('admin/addNewProduct.ejs', {message: status});
         }
     }) 

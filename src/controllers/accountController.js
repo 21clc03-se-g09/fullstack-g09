@@ -34,7 +34,7 @@ let login = (req, res) => {
     if (username && password) {
         account.findUser(username, (err, user) => {
             if (!user) {
-                const conflictError = 'Tài khoản hoặc mật khẩu không chính xác';
+                const conflictError = 'Account or password is wrong.';
                 return res.render('login.ejs', {conflictError });
             } 
             else {
@@ -61,7 +61,7 @@ let login = (req, res) => {
                                 }); 
                             }
                             else{
-                                const conflictError= "Tài khoản hoặc mật khẩu không chính xác.";
+                                const conflictError= "Account or password is wrong.";
                                 return res.render('login.ejs', {conflictError });
                             }
                             
@@ -75,7 +75,7 @@ let login = (req, res) => {
     } 
     else {
         // Người dùng không cung cấp thông tin đăng nhập
-        const conflictError = 'Vui lòng cung cấp tên người dùng và mật khẩu.';
+        const conflictError = 'Please provide username and account.';
         return res.render('account.ejs', {conflictError });
     }
 }
@@ -86,7 +86,7 @@ let register = (req, res) => {
     if (new_username && new_password && mail) {
         account.findUser(new_username, (err, user) => { // kiểm tra user có tồn tại không 
             if (user) {
-                const errorRegister = 'Tài khoản đã tồn tại!';
+                const errorRegister = 'Account exists.';
                 return res.render('register.ejs', { errorRegister });
                 
             } 
@@ -100,7 +100,7 @@ let register = (req, res) => {
                         mailController.sendMail(ac.mail, "Verify Email",  (err, otp) => {
                             if (err) {
                                 // Xử lý lỗi gửi email
-                                const errorRegister = 'Lỗi gửi email xác minh';
+                                const errorRegister = 'Failed to send verification';
                                 res.render('register.ejs', { errorRegister });
                             } else {
                                 req.session.otp=otp;
@@ -113,7 +113,7 @@ let register = (req, res) => {
             }
         });
     } else {
-        const errorRegister = 'Vui lòng điền đầy đủ thông tin';
+        const errorRegister = 'Please fullfil all the informations.';
         return res.render('register.ejs', { errorRegister });
     }
 }
@@ -127,7 +127,7 @@ let verifyOtp = (req, res) =>{
             console.log(User);
             account.verify(User, (err, message) => {
                 if(err){
-                    const errorRegister = 'Lỗi xác thực vui lòng thử lại';
+                    const errorRegister = 'Verification error, please try again.';
                     res.render('verifyOtp.ejs', { errorRegister });
                 }
                 else{
@@ -138,13 +138,13 @@ let verifyOtp = (req, res) =>{
         }
         else{
             console.log("otp không đúng ");
-            const errorRegister = 'Mã OTP không đúng vui lòng thử lại';
+            const errorRegister = 'Wrong OTP code, try again.';
             res.render('verifyOtp.ejs', { errorRegister });
         }
 
     } else{
         console.log("vui longf nhaapj otp ");
-        const errorRegister = 'Mã OTP không đúng vui lòng thử lại';
+        const errorRegister = 'Wrong OTP code, try again.';
         res.render('verifyOtp.ejs', { errorRegister });
     }
 }
