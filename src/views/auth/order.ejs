@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../../css/header_footer.css">
   <link rel="stylesheet" href="../../css/auth/order.css">
   
-  <title>TITI GROUP 09</title>
+  <title>TiHi GROUP 09</title>
 </head>
 <body>
   <header> 
@@ -20,19 +20,19 @@
     </div>
     <div class="cart"> 
       <i class="bi bi-cart3"> </i>
-      <p style="font-size: 10px;">Giỏ Hàng</p>
+      <p style="font-size: 10px;">Cart</p>
     </div>
     <div class="notification">
       <i class="bi bi-bell"> </i>
-      <p style="font-size: 10px;">Thông Báo</p>
+      <p style="font-size: 10px;">Notification</p>
     </div>
       
     <div class="account" onclick="toggleLoginOptions()">
       <i class="bi bi-person-circle"></i>
-      <p style="font-size: 10px;">Tài Khoản</p>
+      <p style="font-size: 10px;">Account</p>
       <div class="login-options" id="loginOptions" style="display: none;">
-        <button onclick="redirectTo('/login')">Đăng Nhập</button>
-        <button onclick="redirectTo('/register')">Đăng Ký</button>
+        <button onclick="redirectTo('/login')">Sign In</button>
+        <button onclick="redirectTo('/register')">Sign Up</button>
       </div>
     </div>
     
@@ -56,25 +56,25 @@
         </div>
 
         <form action="/submit-order" method="post">
-            <label for="fullName">Họ và tên:</label>
+            <label for="fullName">Fullname:</label>
             <input type="text" id="fullName" name="fullName" required value="<%= orderIf.FULLNAME %>"> 
-            <label for="phone">Số điện thoại:</label>
+            <label for="phone">Phone number:</label>
             <input type="text" id="phone" name="phone" required value="<%= orderIf.PHONE_NUMBER %>">
     
-            <label for="address">Địa chỉ giao hàng:</label>
+            <label for="address">Address:</label>
             <input type="text" id="address" name="address" required value="<%= orderIf.ADDRESS %>">
             <div class="tolal-money">
-                <p class="total">Tổng đơn hàng: <%=  Intl.NumberFormat().format(orderIf.TOTAL_MONEY*1000)%>đ</p>
+                <p class="total">Total cart: <%=  Intl.NumberFormat().format(orderIf.TOTAL_MONEY*1000)%>đ</p>
               </div>
             <div>
-                <label for="paymentMethod">Phương thức thanh toán:</label>
+                <label for="paymentMethod">Payment method:</label>
                 <select id="paymentMethod" name="paymentMethod" required>
-                    <option value="cash"> ship COD</option>
-                    <option value="creditCard">Thanh toán online</option>
+                    <option value="cash">Cash on Delivery</option>
+                    <option value="creditCard">Online payment</option>
                 </select>
             </div>
             <div  class="order-submit">
-                <button type="submit">Xác nhận đặt hàng</button>
+                <button type="submit">Order confirm</button>
             </div>
         </form>
         

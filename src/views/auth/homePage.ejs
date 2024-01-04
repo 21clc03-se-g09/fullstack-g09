@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/header_footer.css">
   <link rel="stylesheet" href="../css/mainPage.css">
   
-  <title>TITI GROUP 09</title>
+  <title>TiHi GROUP 09</title>
 </head>
 <body>
   <header> 
@@ -20,19 +20,19 @@
     </div>
     <div onclick="redirectTo('/home/cart')" class="cart"> 
       <i class="bi bi-cart3"> </i>
-      <p style="font-size: 10px;">Giỏ Hàng</p>
+      <p style="font-size: 10px;">Cart</p>
     </div>
     <div class="notification">
       <i class="bi bi-bell"> </i>
-      <p style="font-size: 10px;">Thông Báo</p>
+      <p style="font-size: 10px;">Notification</p>
     </div>
       
     <div class="account" onclick="toggleLoginOptions()">
       <i class="bi bi-person-circle"></i>
       <p style="font-size: 10px;"> <%= user %></p>
       <div class="login-options" id="loginOptions" style="display: none;">
-        <button onclick="redirectTo('/home/updateinfor')">Cập nhật thông tin</button>
-        <button onclick="redirectTo('/register')">Đăng xuất</button>
+        <button onclick="redirectTo('/home/updateinfor')">Update profile</button>
+        <button onclick="redirectTo('/register')">Logout</button>
       </div>
     </div>
     
@@ -63,7 +63,7 @@
           <form action="/addtocart" method="post">
             <input type="hidden" name="productId" value="<%= product.ID %>">
             <input type="hidden" name="username" value="<%= user %>">
-            <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+            <button class="add-to-cart" type="submit">Add to cart</button>
           </form>
         </div>
         

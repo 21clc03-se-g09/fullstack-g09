@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/header_footer.css">
   <link rel="stylesheet" href="css/mainPage.css">
   
-  <title>TITI GROUP 09</title>
+  <title>TiHi GROUP 09</title>
 </head>
 <body>
   <header> 
@@ -20,19 +20,19 @@
     </div>
     <div class="cart"> 
       <i class="bi bi-cart3"> </i>
-      <p style="font-size: 10px;">Giỏ Hàng</p>
+      <p style="font-size: 10px;">Cart</p>
     </div>
     <div class="notification">
       <i class="bi bi-bell"> </i>
-      <p style="font-size: 10px;">Thông Báo</p>
+      <p style="font-size: 10px;">Notification</p>
     </div>
       
     <div class="account" onclick="toggleLoginOptions()">
       <i class="bi bi-person-circle"></i>
-      <p style="font-size: 10px;">Tài Khoản</p>
+      <p style="font-size: 10px;">Account</p>
       <div class="login-options" id="loginOptions" style="display: none;">
-        <button onclick="redirectTo('/login')">Đăng Nhập</button>
-        <button onclick="redirectTo('/register')">Đăng Ký</button>
+        <button onclick="redirectTo('/login')">Sign In</button>
+        <button onclick="redirectTo('/register')">Sign Up</button>
       </div>
     </div>
     
@@ -56,28 +56,11 @@
           <img src="<%= product.IMAGE_URL %>"" alt="Book 1">
           <div class="book-title"><%= product.PRODUCT_NAME %></div>
           <div class="book-price"><%= product.PRICE %> đ</div>
-          <button class="add-to-cart">Thêm vào giỏ hàng</button>
+          <button class="add-to-cart">Add to cart</button>
         </div>
       <% }); %>
 
     </div>
-      
-
-  
-    <!-- <div class="product-container">
-      <% products.forEach(function(product) { %>
-          <div class="product">
-              <h2><%= product.PRODUCT_NAME %></h2>
-              <p><strong>Author:</strong> <%= product.AUTHOR_NAME %></p>
-              <p><strong>Category:</strong> <%= product.CATEGORY_NAME %></p>
-              <p><strong>Description:</strong> <%= product.DESCRIPTION %></p>
-              <p><strong>Published Date:</strong> <%= product.PUBLISHED_DATE %></p>
-              <p><strong>Quantity:</strong> <%= product.QUANTITY %></p>
-              <img src="<%= product.IMAGE_URL %>" alt="Product Image" width="200">
-              <button class="add-to-cart" data-product-id="<%= product.ID %>">Add to Cart</button>
-          </div>
-      <% }); %>
-    </div> -->
 
   <footer>
     <div class="footer-container">
