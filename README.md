@@ -1,5 +1,5 @@
 # fullstack-g09
-frontend, backend, database, ....
+Including all Frontend, Backend, Databases, etc
 
 ## Setup environment:
 * Nodejs: https://nodejs.org/en/download/
@@ -9,21 +9,21 @@ frontend, backend, database, ....
   + npm install mysql
   + npm install express-session otp-generator 
   + npm install nodemailer
+
 ## Runing code:
 * Config file:
   + Duplicate file .env.example and rename file .env.example -> .env then Fill in the blanks corresponding to your configuration
 * Run:
   + npm start
+  
 ## File structure: 
 * Frontend:
   + src/views: includes .ejs files containing html and js code snippets
   + src/public: includes files .css , images, things that can be made public
 * Backend:
-  + src/controller:
-  + src/models
+  + src/controller: Used for control every UI on it
 * Server:
   + server.js: config any thinks for server
   + src/route: config router
 * Database:
-  + src/models:
-
+  + src/models
