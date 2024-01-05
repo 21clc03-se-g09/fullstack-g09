@@ -1,7 +1,15 @@
 import admin from "../../models/admin";
 
 let showHomepage=(req, res) => {
-    res.render('admin/homePage.ejs');
+    admin.getOrder(req, (err, order) =>{
+        if(err){
+            res.redirect('/err');
+        }
+        else{
+            res.render('admin/homePage.ejs', { order: order });
+        }
+    }); 
+
 }
 let showAddNewProduct = (req, res) => {
     res.render('admin/addnewproduct.ejs');
@@ -66,6 +74,7 @@ let addNewProduct = (req, res) => {
         }
     }) 
 }
+
 
 
 module.exports = {

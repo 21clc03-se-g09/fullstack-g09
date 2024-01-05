@@ -49,13 +49,16 @@
   </header>
 
   <main class="main-content"> 
-
+   
     <div class="order-container">
+      <% if (typeof orderstatus !== 'undefined') { %>
+        <p style="color: rgb(0, 255, 17);" class="message"><%= orderstatus %></p>
+      <% } %>
         <div class="title-order" >
             Thông Tin Đặt Hàng
         </div>
-
-        <form action="/submit-order" method="post">
+       
+        <form action="/order" method="post">
             <label for="fullName">Fullname:</label>
             <input type="text" id="fullName" name="fullName" required value="<%= orderIf.FULLNAME %>"> 
             <label for="phone">Phone number:</label>
@@ -80,7 +83,6 @@
         
     <div>
   </main>
-
 
   <footer>
     <div class="footer-container">

@@ -22,9 +22,13 @@ let initWebRoutes = (app)=>{
     route.get('/home/cart', auth.loggedin, user.showCart);
     route.get('/home/cart/order',auth.loggedin, user.showOrder);
     route.get('/home/updateinfor', user.showUpdateInfor);
+    route.get('/search', user.searchProduct);
+
     
     route.post('/addtocart', user.addToCart);
     route.post('/updateinfor', user.updateInfor);
+    route.post('/order', user.Order);
+    
 
     ///admin
     route.get('/adminHomePage',admin.isAdmin, admin.showHomepage);
@@ -34,6 +38,7 @@ let initWebRoutes = (app)=>{
     route.post('/addmin/addnewproduct', admin.isAdmin, admin.addNewProduct);
     route.post('/admin/removeacount', admin.removeAcount);
 
+  
 
     //err
     route.get('/err', (req, res) => {

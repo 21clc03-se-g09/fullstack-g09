@@ -16,7 +16,6 @@ let addToCart = (cart, result) =>{
             result(err, err);
         }
         else{
-            console.log(mesage);
             result(null, 'Đã thêm sản phẩm');
         }
     })
@@ -25,10 +24,11 @@ let addToCart = (cart, result) =>{
 let getCart = (username, result) =>{
     sql.query("CALL GET_PRODUCT_CART(?)", [username], (err, product)=>{
         if(err){
-            result(err, err);
+            result(err, null);
         }
         else{
-            result(null, product[0]);
+            console.log(product[0]);
+            result(null, product);
         }
     });
 }
@@ -78,6 +78,29 @@ let updateInfor = (user, result) =>{
     });
 } 
 
+let Order = (user, result) =>{
+    console.log(user);
+    sql.query("CALL ORDERT (?, ?, ?, ?)", [user.username, user.fullName, user.phone, user.address], (err, mesage)=>{
+        if(err){
+            console.log(user);
+            result(err, err);
+        }
+        else{
+            result(null, 'Đặt hàng thành công');
+        }
+    });
+}
+
+let searchProduct= (productName, result) =>{
+    console.log('test' + productName);
+    sql.query("CALL SEARCH_PRODUCT(?)", [productName], (err, product) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, product);
+        }
+    });  
+}
 
 
 
@@ -89,4 +112,6 @@ module.exports = {
     getOrder: getOrder,
     getUserInfor: getUserInfor,
     updateInfor: updateInfor,
+    Order: Order,
+    searchProduct: searchProduct,
 }

@@ -15,8 +15,10 @@
       <img src="img/logo.png">
     </div> 
     <div class="search">
-      <input type="text" placeholder="Search for books...">
+      <form action="/search"  method="get">
+      <input name="productName" id="productName" type="text" placeholder="Search for books..." required>
       <button type="submit">Search</button>
+      </form>
     </div>
     <div onclick="redirectTo('/home/cart')" class="cart"> 
       <i class="bi bi-cart3"> </i>
@@ -57,7 +59,7 @@
     <div class="product-container">
       <% products.forEach(function(product) { %>
         <div class="book">
-          <img src="<%= product.IMAGE_URL %>"" alt="Book 1">
+          <img src="<%= product.IMAGE_URL %>"" alt="Book">
           <div class="book-title"><%= product.PRODUCT_NAME %></div>
           <div class="book-price"><%= product.PRICE %> đ</div>
           <form action="/addtocart" method="post">
@@ -70,9 +72,6 @@
       <% }); %>
     </div>
   </main>
-
-    
-    
 
   <footer>
     <div class="footer-container">

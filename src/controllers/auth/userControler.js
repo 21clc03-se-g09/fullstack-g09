@@ -27,16 +27,17 @@ let showCart = (req, res) => {
                     res.redirect('/err');
                 }
                 else{
-                    res.render('auth/cart.ejs', {username: username, products: products, totalCart: totalCart});
+                    res.render('auth/cart.ejs', {username: username, products: products[0], totalCart: totalCart});
                 }
             }) 
         }
     });
 }
 
-let addToCart = (req, res) => {
-    const {productId, username} = req.body;
+let addToCart = (req, res) => { 
+    const {productId, username} =req.body;
     const cart = {productId, username};
+    
     home.addToCart(cart, (err, message)=>{
         console.log(message);
         if(err){
@@ -88,6 +89,42 @@ let updateInfor = (req, res) =>{
     });
 }
 
+let Order = (req, res) =>{
+    const {fullName, phone, address} =req.body;
+    const username = req.session.user;
+    const order = {username, fullName, phone, address}
+    home.Order(order, (err, message)=>{
+        if(err){
+            res.redirect('/err');
+        }
+        else{
+            home.getOrder(username, (err, orderIf)=>{
+                if(err){
+                    res.redirect('/err');
+                }
+                else{
+                    res.render('auth/order.ejs', {username: username, orderIf: orderIf[0], orderstatus: message});
+                }
+            });
+        
+        }
+    });
+}
+
+let searchProduct =  (req, res) =>{
+    console.log(req);
+    const {productName} = req.body;
+    console.log(productName);
+    home.searchProduct(req, (productName, products)=>{
+        if(err){
+            return res.redirect('/err');
+        }
+        else{
+            return res.render('auth/homePage.ejs', {products: products[0]});
+        }
+    });
+}
+
 module.exports = {
     showHomePage : showHomePage,
     showCart: showCart,
@@ -95,4 +132,6 @@ module.exports = {
     showOrder: showOrder,
     showUpdateInfor: showUpdateInfor,
     updateInfor: updateInfor,
+    Order: Order,
+    searchProduct:searchProduct,
 }

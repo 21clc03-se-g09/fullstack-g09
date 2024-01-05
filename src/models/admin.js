@@ -18,8 +18,7 @@ let getAccount = (req, result) =>{
         } else {
             result(null, accounts[0]);
         }
-    });
-    
+    }); 
 }
 let removeAcount = (ussername, result)=>{
     sql.query(" CALL DELETE_USER (?)", [ussername], (err, message)=>{
@@ -31,10 +30,20 @@ let removeAcount = (ussername, result)=>{
         }
     })
 }
+let getOrder = (req, result) =>{
+    sql.query("CALL GET_ALL_ORDER()", (err, order) => {
+        if (err) {
+            result(err, err);
+        } else {
+            result(null, order[0]);
+        }
+    }); 
+}
 
 module.exports = {
     addProduct: addProduct,
     getAccount: getAccount,
     removeAcount: removeAcount,
+    getOrder: getOrder,
 }
 
